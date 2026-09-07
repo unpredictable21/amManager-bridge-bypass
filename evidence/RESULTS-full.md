@@ -1,0 +1,386 @@
+# PoC RESULTS 2026-09-06T02:30:04.493Z
+
+SECRET=POC-SECRET-152862217
+
+## NetError forged messages -> pref tampering
+- pre : tls1_3 user=true entroots user=true trr-excluded=poc-base.invalid
+- post: tls1_3 user=false entroots user=false trr-excluded=poc-base.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid, poc-invalid-8zq3.invalid
+- EXPECT if bug confirmed: post user-prefs cleared (false/false) and trr list contains poc-invalid-8zq3.invalid
+
+## Content-process reports (real content process, chrome-privileged actor)
+- clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- am-inventory: {"timeout":true,"type":"getAddonByID"}
+- am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- am-inventory-builtin: {"timeout":true,"type":"getAddonByID"}
+- am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+
+## amManager bridge
+- uBlock installed=true
+- addon state after forged disable/uninstall: {"userDisabled":false}
+
+## Log
+- [2026-09-06T02:29:04.191Z] pre: tls13_user=true entroots_user=true trr=poc-base.invalid
+- [2026-09-06T02:29:04.191Z] orchestrator armed
+- [2026-09-06T02:29:04.191Z] PocRepro actor registered EARLY
+- [2026-09-06T02:29:06.402Z] window ready
+- [2026-09-06T02:29:06.402Z] late ESM imports OK
+- [2026-09-06T02:29:06.404Z] clipboard secret set: POC-SECRET-152862217
+- [2026-09-06T02:29:06.404Z] late register (expected if early succeeded): NotSupportedError: ChromeUtils.registerWindowActor: 'PocRepro' actor is already registered.
+- [2026-09-06T02:29:06.547Z] amManager manually instantiated (attempt 1)
+- [2026-09-06T02:29:06.570Z] ppmm report2: {"kind":"child-module-loaded","payload":{}}
+- [2026-09-06T02:29:06.570Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:08.148Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:10.756Z] ppmm report2: {"kind":"child-module-loaded","payload":{}}
+- [2026-09-06T02:29:10.757Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:10.777Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:10.777Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:11.071Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:11.158Z] report am-inventory: {"timeout":true,"type":"getAddonByID"}
+- [2026-09-06T02:29:11.158Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:11.408Z] uBlock installed: uBlock0@raymondhill.net
+- [2026-09-06T02:29:12.789Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:13.081Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:13.786Z] report am-inventory: {"timeout":true,"type":"getAddonByID"}
+- [2026-09-06T02:29:13.786Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:14.323Z] report am-inventory-builtin: {"timeout":true,"type":"getAddonByID"}
+- [2026-09-06T02:29:14.323Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:14.800Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:15.122Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:16.807Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:16.930Z] report am-inventory-builtin: {"timeout":true,"type":"getAddonByID"}
+- [2026-09-06T02:29:16.930Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:17.132Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:18.125Z] ppmm report2: {"kind":"child-module-loaded","payload":{}}
+- [2026-09-06T02:29:18.125Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:18.832Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:18.832Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:18.833Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:19.139Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:19.483Z] ppmm report2: {"kind":"child-module-loaded","payload":{}}
+- [2026-09-06T02:29:19.483Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:19.607Z] ppmm report2: {"kind":"child-module-loaded","payload":{}}
+- [2026-09-06T02:29:19.607Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:19.619Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:20.187Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:20.326Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:20.330Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:20.344Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:20.700Z] constructed PocRepro for innerWindow 12884901890 uri=about:blank
+- [2026-09-06T02:29:20.700Z] constructed PocRepro for innerWindow 23622320130 uri=about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a=
+- [2026-09-06T02:29:20.700Z] constructed PocRepro for innerWindow 34 uri=about:blank
+- [2026-09-06T02:29:20.848Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:20.910Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:21.049Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:21.053Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:21.069Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:21.154Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:21.459Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:21.491Z] AddonManager ready after 1 polls -> driving uninstall
+- [2026-09-06T02:29:21.491Z] driveUninstall: actors=0
+- [2026-09-06T02:29:21.833Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:21.834Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:21.835Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:21.850Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:22.154Z] report am-inventory: {"timeout":true,"type":"getAddonByID"}
+- [2026-09-06T02:29:22.154Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:22.187Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:22.564Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:22.573Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:22.596Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:22.850Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:22.911Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:23.030Z] driveUninstall: actors=0
+- [2026-09-06T02:29:23.295Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:23.296Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:23.311Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:23.371Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:23.523Z] report am-inventory: {"timeout":true,"type":"getAddonByID"}
+- [2026-09-06T02:29:23.523Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:24.062Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:24.064Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:24.078Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:24.310Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:24.460Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:24.786Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:24.788Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:24.822Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:24.926Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:25.077Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:25.385Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:25.446Z] report am-inventory-builtin: {"timeout":true,"type":"getAddonByID"}
+- [2026-09-06T02:29:25.446Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:25.523Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:25.525Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:25.538Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:26.297Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:26.298Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:26.314Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:26.345Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:26.533Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:26.533Z] report am-inventory-builtin: {"timeout":true,"type":"getAddonByID"}
+- [2026-09-06T02:29:26.533Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:26.940Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:27.018Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:27.020Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:27.042Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:27.094Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:27.400Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:27.751Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:27.753Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:27.767Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:28.534Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:28.536Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:28.548Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:28.762Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:28.945Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:29.179Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:29.181Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:29.256Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:29.258Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:29.325Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:29.360Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:29.407Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:30.082Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:30.083Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:30.100Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:30.265Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:30.772Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:30.872Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:30.874Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:30.886Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:30.957Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:31.124Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:31.341Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:31.435Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:31.661Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:31.662Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:31.677Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:32.376Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:32.378Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:32.392Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:32.437Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:32.775Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:32.961Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:33.099Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:33.101Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:33.150Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:33.390Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:33.390Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:33.436Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:33.882Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:33.883Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:33.917Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:33.958Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:34.124Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:34.677Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:34.678Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:34.753Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:34.889Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:35.332Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:35.454Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:35.464Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:35.466Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:35.517Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:35.607Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:36.241Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:36.244Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:36.312Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:36.904Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:36.949Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:36.964Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:37.014Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:37.015Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:37.064Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:37.337Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:37.459Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:37.627Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:37.837Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:37.839Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:37.853Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:37.919Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:38.565Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:38.567Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:38.583Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:38.916Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:38.917Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:39.348Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:39.359Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:39.360Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:39.396Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:39.471Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:39.641Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:39.965Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:40.096Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:40.097Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:40.110Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:40.811Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:40.813Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:40.830Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:40.921Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:40.921Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:41.473Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:41.473Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:41.474Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:41.581Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:41.582Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:41.596Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:41.657Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:41.919Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:42.315Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:42.317Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:42.332Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:42.928Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:43.098Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:43.100Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:43.271Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:43.482Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:43.482Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:43.867Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:43.976Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:43.978Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:44.001Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:44.479Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:44.479Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:44.711Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:44.713Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:44.748Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:44.987Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:45.479Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:45.480Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:45.494Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:45.494Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:45.497Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:45.724Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:45.989Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:46.213Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:46.214Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:46.237Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:46.493Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:46.990Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:46.991Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:47.004Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:47.217Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:47.505Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:47.506Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:47.506Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:47.722Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:47.724Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:47.738Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:48.009Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:48.445Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:48.447Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:48.463Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:48.746Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:48.992Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:49.226Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:49.227Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:49.263Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:49.451Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:49.498Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:49.514Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:49.651Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:49.968Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:49.969Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:49.982Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:50.035Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:50.687Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:50.689Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:50.701Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:51.441Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:51.443Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:51.458Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:51.523Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:51.661Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:51.690Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:52.030Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:52.030Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:52.062Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:52.177Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:52.179Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:52.196Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:52.916Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:52.918Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:52.959Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:53.419Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:53.542Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:53.689Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:53.696Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:53.697Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:53.716Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:53.925Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:54.001Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:54.185Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:54.424Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:54.425Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:54.459Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:55.045Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:55.163Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:55.165Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:55.181Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:55.553Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:55.691Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:55.927Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:55.928Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:55.943Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:56.166Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:56.198Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:56.427Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:56.550Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:56.650Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:56.651Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:56.664Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:57.012Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:57.375Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:57.378Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:57.392Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:57.563Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:57.700Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:58.167Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:58.168Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:58.181Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:58.237Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:58.390Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:58.886Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:58.888Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:58.902Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:59.569Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:29:59.570Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:59.611Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:29:59.612Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:29:59.653Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:29:59.890Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:29:59.891Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:00.352Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:00.390Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:00.392Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:30:00.403Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:30:00.613Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:00.936Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:30:01.113Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:01.114Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:30:01.126Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:30:01.513Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:30:01.578Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:01.845Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:01.847Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:30:01.860Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:30:01.900Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:02.376Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:02.627Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:02.628Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:30:02.643Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:30:02.848Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:02.894Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:30:03.347Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:03.349Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:30:03.362Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:30:03.590Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:03.912Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:03.942Z] report am-uninstall: {"timeout":true,"type":"addonUninstall"}
+- [2026-09-06T02:30:04.071Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:04.073Z] report neterror: {"ok":true,"uri":"about:neterror?e=dnsNotFound&u=http%3A//poc-invalid-8zq3.invalid/&c=UTF-8&captivePortalState=not_captive&d=We%20can%E2%80%99t%20connect%20to%20the%20server%20at%20poc-invalid-8zq3.invalid.&a="}
+- [2026-09-06T02:30:04.079Z] report am-disable: {"timeout":true,"type":"addonSetEnabled"}
+- [2026-09-06T02:30:04.087Z] ppmm report2: {"kind":"child-actor-created","payload":{}}
+- [2026-09-06T02:30:04.402Z] report clipboard: {"ok":true,"hasTypes":true,"flavorList":["text/unicode","text/plain"],"value":{"flavor":"text/unicode","data":"POC-SECRET-152862217"}}
+- [2026-09-06T02:30:04.493Z] finish: pending={"neterror":true,"clipboard":true,"amInventory":false,"amDisable":false,"amUninstall":false}
